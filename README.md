@@ -1,6 +1,10 @@
 # sqlite_listview
 
-A new Flutter project.
+This is a demo Flutte project for local persistence. This project will
+    a) use SQLite as local Database.  
+    b) use Futurebuilder to create list of fruits
+    c) [sqflite plugin used](https://pub.dev/packages/sqflite)
+    d) List, Add, edit, delete operations implemented into Database
 
 ## Getting Started
 
