@@ -25,13 +25,13 @@ class DBHelper{
     );
   }
 
-  // Define a function that inserts dogs into the database
+  // Define a function that inserts fruits into the database
   Future<void> insertFruit(Fruit fruit) async {
     // Get a reference to the database.
     final db = await initializeDB();
 
-    // Insert the Dog into the correct table. You might also specify the
-    // `conflictAlgorithm` to use in case the same dog is inserted twice.
+    // Insert the Fruit into the correct table. You might also specify the
+    // `conflictAlgorithm` to use in case the same fruit is inserted twice.
     //
     // In this case, replace any previous data.
     await db.insert(
@@ -41,12 +41,12 @@ class DBHelper{
     );
   }
 
-  // A method that retrieves all the dogs from the dogs table.
+  // A method that retrieves all the fruits from the fruits table.
   Future<List<Fruit>> fruits() async {
     // Get a reference to the database.
     final db = await initializeDB();
 
-    // Query the table for all The Dogs.
+    // Query the table for all The Fruits.
     final List<Map<String, dynamic>> maps = await db.query('fruits');
 
     // Convert the List<Map<String, dynamic> into a List<Fruit>.
@@ -64,13 +64,13 @@ class DBHelper{
     // Get a reference to the database.
     final db = await initializeDB();
 
-    // Update the given Dog.
+    // Update the given Fruit.
     await db.update(
       'fruits',
       fruit.toMap(),
-      // Ensure that the Dog has a matching id.
+      // Ensure that the Fruit has a matching id.
       where: 'id = ?',
-      // Pass the Dog's id as a whereArg to prevent SQL injection.
+      // Pass the Fruit's id as a whereArg to prevent SQL injection.
       whereArgs: [fruit.id],
     );
   }
@@ -79,12 +79,12 @@ class DBHelper{
     // Get a reference to the database.
     final db = await initializeDB();
 
-    // Remove the Dog from the database.
+    // Remove the Fruit from the database.
     await db.delete(
       'fruits',
-      // Use a `where` clause to delete a specific dog.
+      // Use a `where` clause to delete a specific fruit.
       where: 'id = ?',
-      // Pass the Dog's id as a whereArg to prevent SQL injection.
+      // Pass the Fruit's id as a whereArg to prevent SQL injection.
       whereArgs: [id],
     );
   }

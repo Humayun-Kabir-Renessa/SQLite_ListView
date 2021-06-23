@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-
+// This is Fruit model class.
 class Fruit{
   int id;
   final String name;
@@ -21,7 +21,7 @@ Map<String, dynamic> toMap(){
     'season': this.season
   };
 }
-
+// String
 @override
   String toString(){
   return 'Fruit{id: $id, name: $name, taste: $taste, season: $season}';

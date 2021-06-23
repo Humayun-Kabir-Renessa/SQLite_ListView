@@ -39,38 +39,45 @@ class _FruitListState extends State<FruitList> {
   void initState(){
     super.initState();
   }
-
+// method to insert a Fruit into SQLite Database
   insertDB(Fruit fruit) async{
     await db.insertFruit(fruit);
   }
-
+// method to update a Fruit into SQLite Database
   updateDB(Fruit fruit) async{
     await db.updateFruit(fruit);
   }
-
+// method to delete a Fruit into SQLite Database
   deleteDB(int id) async{
     await db.deleteFruit(id);
   }
 
   printFruit() async{
-    // Now, use the method above to retrieve all the dogs.
+    // Now, use the method above to retrieve all the fruits.
     print(await db.fruits());
   }
-  
+
+  // This method is responsible to navigate to AddFruitPage.
+  // this method will wait for add action from AddFruitPage.
+  // If add button is clicked, it will refresh home screen to
+  // add new fruit into list view
   Future<void> goToAddFruitScreen() async{
     var result = await Navigator.push(context, MaterialPageRoute(builder: (context) => AddFruit()));
     if(result != null){
-      print('refreshing home screen');
+      // refreshing list view
       setState(() {
 
       });
     }
   }
-
+  // This method is responsible to navigate to EditFruitPage.
+  // this method will wait for update action from EditFruitPage.
+  // If update button is clicked, it will refresh home screen to
+  // edit fruit into list view
   Future<void> goToEditFruitScreen(Fruit fruit) async{
     var result = await Navigator.push(context, MaterialPageRoute(builder: (context) => EditFruit(fruit: fruit)));
     if(result != null){
-      print('refreshing home screen');
+     // refreshing list view
       setState(() {
 
       });
@@ -103,15 +110,12 @@ class _FruitListState extends State<FruitList> {
         ),
         body: FutureBuilder<List>(
           future: db.fruits(),
-          //initialData: List(),
           builder: (context, snapshot) {
-            //print('itemCount1 = ${snapshot.data?.length}');
             return snapshot.hasData ?
             new ListView.builder(
               padding: const EdgeInsets.all(10.0),
               itemCount: snapshot.data?.length,
               itemBuilder: (context, i) {
-                //print('itemCount2 = ${snapshot.data?.length}');
                 return Dismissible(
                   direction: DismissDirection.endToStart,
                   key: UniqueKey(),
@@ -138,8 +142,6 @@ class _FruitListState extends State<FruitList> {
                     child: Icon(Icons.delete_forever, color: Colors.white,),
                   ),
                   onDismissed: (direction) {
-                    // TODO: implement your delete function and check direction if needed
-                    //_deleteMessage(index);
                     db.deleteFruit(snapshot.data?[i].id);
 
                   },
@@ -152,34 +154,5 @@ class _FruitListState extends State<FruitList> {
           },
         )
     );
-  }
-  Widget _buildRow(Fruit fruit) {
-    return ListTile(
-      leading: Text('${fruit.id}'),
-      title: new Text(fruit.name),
-      subtitle: new Text(fruit.taste),
-      trailing: new Text(fruit.season),
-    );
-
-    /*Dismissible(
-      direction: DismissDirection.startToEnd,
-      key: ObjectKey(snapshot.documents.elementAt(index)),
-      child: new ListTile(
-        leading: Text('${fruit.id}'),
-        title: new Text(fruit.name),
-        subtitle: new Text(fruit.taste),
-        trailing: new Text(fruit.season),
-      ),
-      background: Container(
-        padding: EdgeInsets.only(left: 28.0),
-        alignment: AlignmentDirectional.centerStart,
-        color: Colors.red,
-        child: Icon(Icons.delete_forever, color: Colors.white,),
-      ),
-      onDismissed: (direction) {
-        // TODO: implement your delete function and check direction if needed
-        //_deleteMessage(index);
-      },
-    );*/
   }
 }

@@ -101,9 +101,7 @@ class _AddFruitState extends State<AddFruit> {
                   onPressed: () {
                     // Validate returns true if the form is valid, or false otherwise.
                     if (_formKey.currentState!.validate()) {
-                      print('fruit name = $fruitName, fruit taste = $fruitTaste, fruit season = $fruitSeason');
-                      // If the form is valid, display a snackbar. In the real world,
-                      // you'd often call a server or save the information in a database.
+                      // If the form is valid, insert fruit into SQLite Database.
                       var tempFruit = Fruit(id: 3,name: fruitName, taste: fruitTaste, season: fruitSeason);
                       db.insertFruit(tempFruit);
 
