@@ -37,38 +37,6 @@ class _FruitListState extends State<FruitList> {
   var db = DBHelper();
   @override
   void initState(){
-    var mango = Fruit(
-        id: 0,
-        name: 'mango',
-        taste: 'sweet',
-        season: '3 months'
-    );
-    var litchi = Fruit(
-        id: 1,
-        name: 'litchi',
-        taste: 'sweet',
-        season: '20 days'
-    );
-    //insertDB(mango);
-    //insertDB(litchi);
-    printFruit();
-
-    // Update mango's season and save it to the database.
-    mango = Fruit(
-      id: mango.id,
-      name: mango.name,
-      taste: mango.taste,
-      season: '2 months',
-    );
-
-    //updateDB(mango);
-    //printFruit();
-
-    //deleteDB(mango.id);
-    //deleteDB(0);
-    //deleteDB(1);
-    //printFruit();
-
     super.initState();
   }
 
@@ -121,7 +89,9 @@ class _FruitListState extends State<FruitList> {
                 child: InkWell(
                   onTap: () {
                     // navigate to add fruit class
-                    goToAddFruitScreen();
+                    setState(() {
+                      goToAddFruitScreen();
+                    });
                     },
                   child: Icon(
                     Icons.add,
@@ -147,13 +117,18 @@ class _FruitListState extends State<FruitList> {
                   key: UniqueKey(),
                   child: InkWell(
                     onTap: (){
-                      goToEditFruitScreen(snapshot.data?[i]);
+                      setState(() {
+                        goToEditFruitScreen(snapshot.data?[i]);
+                      });
                     },
-                    child: new ListTile(
-                      leading: Text('${snapshot.data?[i].id}'),
-                      title: new Text(snapshot.data?[i].name),
-                      subtitle: new Text(snapshot.data?[i].taste),
-                      trailing: new Text(snapshot.data?[i].season),
+                    child: Card(
+                      elevation: 2.0,
+                      child: new ListTile(
+                        leading: Text('${snapshot.data?[i].id}'),
+                        title: new Text(snapshot.data?[i].name),
+                        subtitle: new Text(snapshot.data?[i].taste),
+                        trailing: new Text(snapshot.data?[i].season),
+                      ),
                     ),
                   ),
                   background: Container(
@@ -165,12 +140,7 @@ class _FruitListState extends State<FruitList> {
                   onDismissed: (direction) {
                     // TODO: implement your delete function and check direction if needed
                     //_deleteMessage(index);
-                    snapshot.data?.remove(i);
-                    db.deleteFruit(snapshot.data?[i].id).then((_){
-                      setState(() {
-
-                      });
-                    });
+                    db.deleteFruit(snapshot.data?[i].id);
 
                   },
                 );

@@ -33,60 +33,69 @@ class _EditFruitState extends State<EditFruit> {
               child: Icon(Icons.arrow_back_ios)
           ),
           centerTitle: true,
-          title: Text('Add Fruit'),
+          title: Text('Edit Fruit'),
         ),
         body: Form(
           key: _formKey,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              TextFormField(
-                initialValue: widget.fruit.name,
-                decoration: InputDecoration(
-                    border: UnderlineInputBorder(),
-                    labelText: 'Enter Fruit Name'
+              Padding(
+                padding: const EdgeInsets.fromLTRB(10.0,10.0,10.0,0.0),
+                child: TextFormField(
+                  initialValue: widget.fruit.name,
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Enter Fruit Name'
+                  ),
+                  // The validator receives the text that the user has entered.
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter Fruit Name';
+                    }
+                    fruitName = value;
+                    return null;
+                  },
                 ),
-                // The validator receives the text that the user has entered.
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter Fruit Name';
-                  }
-                  fruitName = value;
-                  return null;
-                },
-              ),
-              TextFormField(
-                initialValue: widget.fruit.taste,
-                decoration: InputDecoration(
-                    border: UnderlineInputBorder(),
-                    labelText: 'Enter Fruit taste'
-                ),
-                // The validator receives the text that the user has entered.
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter Fruit taste';
-                  }
-                  fruitTaste = value;
-                  return null;
-                },
-              ),
-              TextFormField(
-                initialValue: widget.fruit.season,
-                decoration: InputDecoration(
-                    border: UnderlineInputBorder(),
-                    labelText: 'Enter fruit season'
-                ),
-                // The validator receives the text that the user has entered.
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter fruit season';
-                  }
-                  fruitSeason = value;
-                  return null;
-                },
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                padding: const EdgeInsets.fromLTRB(10.0,10.0,10.0,0.0),
+                child: TextFormField(
+                  initialValue: widget.fruit.taste,
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Enter Fruit taste'
+                  ),
+                  // The validator receives the text that the user has entered.
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter Fruit taste';
+                    }
+                    fruitTaste = value;
+                    return null;
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(10.0,10.0,10.0,0.0),
+                child: TextFormField(
+                  initialValue: widget.fruit.season,
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Enter fruit season'
+                  ),
+                  // The validator receives the text that the user has entered.
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter fruit season';
+                    }
+                    fruitSeason = value;
+                    return null;
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0.0,20.0,0.0,0.0),
                 child: ElevatedButton(
                   onPressed: () {
                     // Validate returns true if the form is valid, or false otherwise.

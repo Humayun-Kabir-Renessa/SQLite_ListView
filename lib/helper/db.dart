@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqlite_listview/model/fruit.dart';
-import 'package:flutter/material.dart';
+
 class DBHelper{
   var database;
 
